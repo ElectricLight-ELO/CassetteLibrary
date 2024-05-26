@@ -6,6 +6,15 @@
 vector<User> users = vector<User>();
 vector<Сassette> cassettes = vector<Сassette>();
 
+bool isNumber(const std::string& input) {
+	std::stringstream ss(input);
+	int number;
+	// Попробуем прочитать число из строки
+	ss >> number;
+	// Проверяем, удалось ли прочитать число и нет ли лишних символов
+	return !ss.fail() && ss.eof();
+}
+
 int main()
 {
 	setlocale(0, "RU");
@@ -13,7 +22,7 @@ int main()
 	while (true)
 	{
 	work:
-		int n = 0;
+		string d = "";
 		cout << endl << "Создать нового пользователя 1" << endl;
 		cout << "Добавить кассету VHS 2" << endl;
 		cout << "Выдать кассету 3" << endl;
@@ -21,9 +30,15 @@ int main()
 		cout << "Получить занятые кассеты 5" << endl;
 		cout << "Вывести все кассеты 6" << endl;
 		cout << "Вывести всех пользователей 7" << endl;
+		cout << "Удалить кассету 8" << endl;
 		cout << "Введите вариант работы: " << endl << endl;
-		cin >> n;
-
+		cin >> d;
+		if (!isNumber(d))
+		{
+			cout << "!Введите число!" << endl;
+			continue;
+		}
+		int n = stoi(d);
 		switch (n)
 		{
 		case 1:
@@ -92,7 +107,6 @@ int main()
 				cout << "Дата введена не верно" << endl;
 				goto work;
 			}
-
 			Сassette::sAuthor author;
 			Сassette tmp(bookName, author, 0);
 			Сassette::DateReceiv Drecv;
@@ -129,6 +143,8 @@ int main()
 			{
 				cout << "Кассета cвободна" << endl;
 			}
+
+			break;
 		}
 		case 5:
 		{
@@ -141,14 +157,32 @@ int main()
 			break;
 		}
 		case 7:
-		{
-			for (User us : users)
+		{ 
+			for (User us : users)//ВЫВОД ВСЕХ ПОЛЬЗОВАТЕЛЕЙ
 			{
 				User::sUs_initials init = us.retName();
 
 				cout << "Фамилия: " << init.second_name << endl;
 				cout << "Имя: " << init.name << endl;
 				cout << "ID: " << init.id << endl << endl;
+				
+			}
+			break;
+		}
+		case 8:
+		{
+			cout << "Введите название книги: " << endl;
+			string nameCasset;
+			cin >> nameCasset;
+			Сassette::sAuthor author;
+			Сassette used(nameCasset, author, 0);;
+			if (!RemoveCasset(cassettes, used))
+			{
+				cout << "Кассета занята, либо её не существует" << endl;
+			}
+			else
+			{
+				cout << "Кассета удалена" << endl;
 			}
 			break;
 		}

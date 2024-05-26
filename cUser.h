@@ -20,6 +20,6 @@ public:
 	void putBook(Сassette cc);
 private:
 	sUs_initials initials;
-	vector<Сassette> booksGoted = vector<Сassette>();
+	vector<Сassette> casseteGoted = vector<Сassette>(); // полученные кассеты
 };
 

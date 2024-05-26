@@ -26,15 +26,15 @@ public:
 	string GetName();
 	sAuthor GetAuthor();
 	int GetInfoTaking();
-	
 	void PutDate(DateReceiv dRc, DateReturn dRt, int allPrice);
 	void RemoveDate();
 	DateReceiv GetDateReceiv();
 	DateReturn GetDateReturn();
-
 	int GetPriceDay();
 	int GetPriceRent();
 	void RemovePriceRent();
+
+
 private:
 	string name;
 	sAuthor author;

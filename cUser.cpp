@@ -12,10 +12,10 @@ User::sUs_initials User::retName()
 
 vector<Ñassette>& User::retBooks()
 {
-	return booksGoted;
+	return casseteGoted;
 }
 
 void User::putBook(Ñassette cc)
 {
-	booksGoted.push_back(cc);
+	casseteGoted.push_back(cc);
 }

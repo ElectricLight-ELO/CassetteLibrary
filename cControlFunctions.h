@@ -112,9 +112,11 @@ bool PassCasset(vector<User>& usrs, string idUser, vector<Сassette>& bk, Сassett
                     if (bk[j].GetName() == bok.GetName())  // ищем книгу по массиву, опираясь на имя
                     {
                         int allDays = countDays(dateRec, dateRet);
-                        int price = allDays = allDays * bk[j].GetPriceDay();
+                        int price = allDays = allDays * bk[j].GetPriceDay() + 1;
                         bk[j].PutDate(dateRec, dateRet, price);  // установка даты выдачи/возврата
                         usrs[i].putBook(bk[j]); // помещаем найденую книгу к пользователю
+
+                        cout << "Итоговая цена: " << price << endl;
                         break;
                     }
                 }
@@ -161,14 +163,18 @@ void ShowAllCasset(vector<Сassette>& casset)
 
 bool RemoveCasset(vector<Сassette>& bk, Сassette& bok)
 {
-    for (int i = 0; i < bk.size(); i++)
+    if (existCasset(bk, bok))  // поиск книги и проверка забрал ли её кто-то(2 в 1)
     {
-        if (bk[i].GetName() == bok.GetName())
+        for (int i = 0; i < bk.size(); i++)
         {
-            bk.erase(bk.begin() + i);
-            return true;
+            if (bk[i].GetName() == bok.GetName())
+            {
+                bk.erase(bk.begin() + i);
+                return true;
+            }
         }
     }
+    
 
     return false;
 }
