@@ -176,13 +176,14 @@ int main()
 			cin >> nameCasset;
 			Сassette::sAuthor author;
 			Сassette used(nameCasset, author, 0);;
-			if (!RemoveCasset(cassettes, used))
+			if (RemoveCasset(cassettes, used))
 			{
-				cout << "Кассета занята, либо её не существует" << endl;
+				cout << "Кассета удалена" << endl;
+				
 			}
 			else
 			{
-				cout << "Кассета удалена" << endl;
+				cout << "Кассета занята, либо её не существует" << endl;
 			}
 			break;
 		}
